@@ -55,6 +55,11 @@
     <Compile Include="Animation\Animation.cs" />
     <Compile Include="Animation\AnimationFrame.cs" />
     <Compile Include="Button\Button.cs" />
+    <Compile Include="Enum\EnumActionCommand.cs" />
+    <Compile Include="Enum\EnumMoveCommand.cs" />
+    <Compile Include="Enum\EnumMessageToServer.cs" />
+    <Compile Include="Enum\EnumMessageFromServer.cs" />
+    <Compile Include="Enum\EnumTypeElement.cs" />
     <Compile Include="Graphics\Element.cs" />
     <Compile Include="Graphics\Resolution.cs" />
     <Compile Include="Graphics\Sprite.cs" />

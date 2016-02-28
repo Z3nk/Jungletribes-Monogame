@@ -2,6 +2,10 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Jungletribes_Common;
+using System;
+using System.Configuration;
+using Lidgren.Network;
+
 namespace Jungletribes
 {
     /// <summary>
@@ -16,7 +20,8 @@ namespace Jungletribes
 
         public static readonly int widthScreen = 1920;
         public static readonly int heightScreen = 1080;
-
+        public static readonly string serverIp = "serverIp";
+        public static readonly string serverPort = "serverPort";
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -24,6 +29,8 @@ namespace Jungletribes
             Content.RootDirectory = "Content";
             Resolution.SetVirtualResolution(widthScreen, heightScreen);
             Resolution.SetResolution(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight, false);
+
+           
         }
 
         /// <summary>
@@ -34,7 +41,14 @@ namespace Jungletribes
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            var appSettings = ConfigurationManager.AppSettings;
+            string IP = appSettings[serverIp] ?? "Not Found";
+            int PORT = Int32.Parse(appSettings[serverPort]) ;
+            var config = new NetPeerConfiguration("Jungletribes");
+            var client = new NetClient(config);
+            client.Start();
+            client.Connect(IP, PORT);
+            new WorldState(client);
 
             base.Initialize();
         }
@@ -84,7 +98,7 @@ namespace Jungletribes
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);            
             spriteBatch.Begin(SpriteSortMode.FrontToBack, null, null, null, null, null, Resolution.getTransformationMatrix());
-            spriteBatch.Draw(test, new Rectangle(0, 0, test.Width*5,test.Height*5), Color.White);
+            spriteBatch.Draw(test, new Rectangle(0, 0, test.Width,test.Height), Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);
