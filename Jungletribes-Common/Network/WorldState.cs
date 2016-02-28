@@ -25,7 +25,9 @@ namespace Jungletribes_Common
                 {
                     case NetIncomingMessageType.Data:
                         int ID = message.ReadUInt16();
-                        NetworkObjects.FirstOrDefault(p => p != null && p.id == ID).Synchronise(message);
+                        var NetworkObject = NetworkObjects.FirstOrDefault(p => p != null && p.id == ID);
+                        if(NetworkObject != null)
+                            NetworkObject.Synchronise(message);
                         break;
 
                     case NetIncomingMessageType.StatusChanged:

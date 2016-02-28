@@ -82,8 +82,7 @@ namespace Jungletribes
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            GraphicsDevice.Clear(Color.CornflowerBlue);            
             spriteBatch.Begin(SpriteSortMode.FrontToBack, null, null, null, null, null, Resolution.getTransformationMatrix());
             spriteBatch.Draw(test, new Rectangle(0, 0, test.Width*5,test.Height*5), Color.White);
             spriteBatch.End();
