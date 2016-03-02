@@ -7,23 +7,25 @@ namespace Jungletribes
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class JungleTribesGame : Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        public static GraphicsDevice graphicsDevice;
+        public SpriteBatch spriteBatch;
+        public static JungleTribesGame Instance;
         Texture2D test;
 
         public static readonly int widthScreen = 1920;
         public static readonly int heightScreen = 1080;
 
-        public Game1()
+        public JungleTribesGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Resolution.Init(ref graphics);
             Content.RootDirectory = "Content";
             Resolution.SetVirtualResolution(widthScreen, heightScreen);
             Resolution.SetResolution(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight, false);
+            if (Instance == null)
+                Instance = this;
         }
 
         /// <summary>

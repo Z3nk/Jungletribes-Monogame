@@ -12,7 +12,7 @@ namespace Jungletribes
         public static readonly String name = "gameScreen";
         public static TimeSpan timer = TimeSpan.FromSeconds(0);
 
-        public GameScreen(Game1 game1)
+        public GameScreen(JungleTribesGame game1)
         {
             this.game = game1;
         }
