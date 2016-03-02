@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Jungletribes_Common;
+
 namespace Jungletribes
 {
     /// <summary>
@@ -12,7 +13,8 @@ namespace Jungletribes
         GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
         public static JungleTribesGame Instance;
-        Texture2D test;
+        public KeyboardState KeyboardState;
+        private Orc test;
 
         public static readonly int widthScreen = 1920;
         public static readonly int heightScreen = 1080;
@@ -20,6 +22,8 @@ namespace Jungletribes
         public JungleTribesGame()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 1600;
+            graphics.PreferredBackBufferHeight = 900;
             Resolution.Init(ref graphics);
             Content.RootDirectory = "Content";
             Resolution.SetVirtualResolution(widthScreen, heightScreen);
@@ -49,7 +53,7 @@ namespace Jungletribes
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            test = Content.Load<Texture2D>("zombie_head");
+            test = new Orc();
 
             // TODO: use this.Content to load your game content here
         }
@@ -72,8 +76,8 @@ namespace Jungletribes
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            // TODO: Add your update logic here
+            KeyboardState=Keyboard.GetState();
+            test.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -86,7 +90,7 @@ namespace Jungletribes
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);            
             spriteBatch.Begin(SpriteSortMode.FrontToBack, null, null, null, null, null, Resolution.getTransformationMatrix());
-            spriteBatch.Draw(test, new Rectangle(0, 0, test.Width*5,test.Height*5), Color.White);
+            test.Draw(gameTime);
             spriteBatch.End();
 
             base.Draw(gameTime);
