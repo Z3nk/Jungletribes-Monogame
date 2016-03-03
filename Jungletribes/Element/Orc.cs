@@ -12,7 +12,8 @@ namespace Jungletribes
 {
     public class Orc : Element
     {
-        public Vector2 position { get; set; }
+        public Vector2 position;
+        public Vector2 speed;
         public Animation A_right { get; set; }
         public Animation A_bot { get; set; }
         public Animation A_left { get; set; }
@@ -24,27 +25,17 @@ namespace Jungletribes
         {
             get
             {
-                switch (commands)
-                {
-                    case EnumMoveCommand.None:
-                        current_animation = A_bot;
-                        break;
-                    case EnumMoveCommand.Right:
-                        current_animation = A_right;
-                        break;
-                    case EnumMoveCommand.Left:
-                        current_animation = A_left;
-                        break;
-                    case EnumMoveCommand.Up:
-                        current_animation = A_top;
-                        break;
-                    case EnumMoveCommand.Bottom:
-                        current_animation = A_bot;
-                        break;
-                    default:
-                        current_animation = A_bot;
-                        break;
-                }
+                if (commands == EnumMoveCommand.None)
+                    current_animation = A_bot;
+                if ((commands & EnumMoveCommand.Right) != EnumMoveCommand.None)
+                    current_animation = A_right;
+                if ((commands & EnumMoveCommand.Left) != EnumMoveCommand.None)
+                    current_animation = A_left;
+                if ((commands & EnumMoveCommand.Up) != EnumMoveCommand.None)
+                    current_animation = A_top;
+                if ((commands & EnumMoveCommand.Bottom) != EnumMoveCommand.None)
+                    current_animation = A_bot;
+
                 return _current_animation;
             }
             set
@@ -69,20 +60,47 @@ namespace Jungletribes
             A_top = new Animation();
             for (int i = 0; i < 9; i++)
                 A_top.AddFrame(new Rectangle(i * 64, 8 * 64, 64, 64), TimeSpan.FromSeconds(.1));
-
-
             if (Orc_Texture == null)
                 using (var stream = TitleContainer.OpenStream("Content/orc.png"))
                 {
                     Orc_Texture = Texture2D.FromStream(JungleTribesGame.Instance.GraphicsDevice, stream);
                 }
             position = new Vector2(0, 0);
+            speed = new Vector2(100, 100);
         }
 
         public override void Update(GameTime gameTime)
         {
+            Vector2 MoveToDo = new Vector2(0, 0);
+            commands = EnumMoveCommand.None;
             if (JungleTribesGame.Instance.KeyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Q))
-                 commands = EnumMoveCommand.Left;
+            {
+                MoveToDo.X -= this.speed.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                commands = commands | EnumMoveCommand.Left;
+            }
+            if (JungleTribesGame.Instance.KeyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.D))
+            {
+                MoveToDo.X += this.speed.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                commands = commands | EnumMoveCommand.Right;
+            }
+            if (JungleTribesGame.Instance.KeyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Z))
+            {
+                MoveToDo.Y -= this.speed.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                commands = commands | EnumMoveCommand.Up;
+            }
+            if (JungleTribesGame.Instance.KeyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.S))
+            {
+                MoveToDo.Y += this.speed.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                commands = commands | EnumMoveCommand.Bottom;
+            }
+            if ((commands & EnumMoveCommand.Horizontal) != EnumMoveCommand.None && (commands & EnumMoveCommand.Vertical) != EnumMoveCommand.None)
+            {
+                MoveToDo.X = (float)(Math.Cos(45) * MoveToDo.X);
+                MoveToDo.Y = (float)(Math.Sin(45) * MoveToDo.Y);
+            }
+
+            this.position += MoveToDo;
+
             current_animation.Update(gameTime);
         }
 
