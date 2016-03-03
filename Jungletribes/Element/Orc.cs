@@ -19,7 +19,6 @@ namespace Jungletribes
         public Animation A_left { get; set; }
         public Animation A_top { get; set; }
 
-        public EnumMoveCommand commands;
         private Animation _current_animation;
         public Animation current_animation
         {
@@ -72,26 +71,21 @@ namespace Jungletribes
         public override void Update(GameTime gameTime)
         {
             Vector2 MoveToDo = new Vector2(0, 0);
-            commands = EnumMoveCommand.None;
-            if (JungleTribesGame.Instance.KeyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Q))
+            if ((commands & EnumMoveCommand.Left) != EnumMoveCommand.None)
             {
                 MoveToDo.X -= this.speed.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                commands = commands | EnumMoveCommand.Left;
             }
-            if (JungleTribesGame.Instance.KeyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.D))
+            if ((commands & EnumMoveCommand.Right) != EnumMoveCommand.None)
             {
                 MoveToDo.X += this.speed.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                commands = commands | EnumMoveCommand.Right;
             }
-            if (JungleTribesGame.Instance.KeyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Z))
+            if ((commands & EnumMoveCommand.Up) != EnumMoveCommand.None)
             {
                 MoveToDo.Y -= this.speed.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                commands = commands | EnumMoveCommand.Up;
             }
-            if (JungleTribesGame.Instance.KeyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.S))
+            if ((commands & EnumMoveCommand.Bottom) != EnumMoveCommand.None)
             {
                 MoveToDo.Y += this.speed.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                commands = commands | EnumMoveCommand.Bottom;
             }
             if ((commands & EnumMoveCommand.Horizontal) != EnumMoveCommand.None && (commands & EnumMoveCommand.Vertical) != EnumMoveCommand.None)
             {

@@ -18,6 +18,14 @@ namespace Jungletribes_Common
                 _id = value;
             }
         }
+
+
+        private EnumMoveCommand _commands;
+        public EnumMoveCommand commands
+        {
+            get { return _commands; }
+            set { _commands = value; }
+        }
         #endregion
 
         #region methods

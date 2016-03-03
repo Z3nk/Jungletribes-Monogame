@@ -15,6 +15,7 @@ namespace Jungletribes
         public static JungleTribesGame Instance;
         public KeyboardState KeyboardState;
         private Orc test;
+        private Element player;
 
         public static readonly int widthScreen = 1920;
         public static readonly int heightScreen = 1080;
@@ -54,6 +55,7 @@ namespace Jungletribes
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             test = new Orc();
+            player = test;
 
             // TODO: use this.Content to load your game content here
         }
@@ -77,6 +79,23 @@ namespace Jungletribes
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             KeyboardState=Keyboard.GetState();
+            player.commands = EnumMoveCommand.None;
+            if (KeyboardState.IsKeyDown(Keys.Q))
+            {
+                player.commands = player.commands | EnumMoveCommand.Left;
+            }
+            if (KeyboardState.IsKeyDown(Keys.D))
+            {
+                player.commands = player.commands | EnumMoveCommand.Right;
+            }
+            if (KeyboardState.IsKeyDown(Keys.Z))
+            {
+                player.commands = player.commands | EnumMoveCommand.Up;
+            }
+            if (KeyboardState.IsKeyDown(Keys.S))
+            {
+                player.commands = player.commands | EnumMoveCommand.Bottom;
+            }
             test.Update(gameTime);
 
             base.Update(gameTime);
