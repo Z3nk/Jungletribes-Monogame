@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,10 +28,16 @@ namespace Jungletribes
         public override void LoadContent()
         {
             isInit = true;
-            button = new StaticGameButton();
-            float X = JungleTribesGame.Instance.widthScreen / 2 - button.size.X / 2;
-            float Y = JungleTribesGame.Instance.heightScreen / 2 - (button.size.Y / 2 + 5);
-            button.position = new Vector2(X, Y);
+            int width = Int32.Parse(ConfigurationManager.AppSettings["GUI_static_game_button_flat_width"]);
+            int height = Int32.Parse(ConfigurationManager.AppSettings["GUI_static_game_button_flat_height"]);
+            string path = ConfigurationManager.AppSettings["GUI_static_game_button_flat_path"];
+            button = new StaticGameButton(JungleTribesGame.Instance.widthScreen / 2 - width / 2, JungleTribesGame.Instance.heightScreen / 2 - height / 2, path);
+            button.onClick += Button_onClick;
+        }
+
+        private void Button_onClick()
+        {
+            ScreenManager.moveTo(GameScreen.name);
         }
 
         public override void UnloadContent()

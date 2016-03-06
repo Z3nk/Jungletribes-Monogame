@@ -23,20 +23,21 @@ namespace Jungletribes
             get;
             set;
         }
-        private readonly String buttonPNG = "Content/GUI_static_game_button_flat.png";
 
-        public StaticGameButton()
+
+
+        public StaticGameButton(float x, float y, string path)
         {
             if (texture == null)
             {
-                using (var stream = TitleContainer.OpenStream(buttonPNG))
+                using (var stream = TitleContainer.OpenStream(path))
                 {
                     texture = Texture2D.FromStream(JungleTribesGame.Instance.GraphicsDevice, stream);
                 }
             }
 
-            this.position = new Vector2(0, 0);
-            this.size = new Vector2(512, 192);
+            this.position = new Vector2(x, y);
+            this.size = new Vector2(texture.Width, texture.Height);
         }
 
         public void Update(GameTime gameTime)
@@ -58,15 +59,8 @@ namespace Jungletribes
             int mouseY = (int)Resolution.AdjustWidthWithScren(mouseState.Position.Y);
             if (bound.Contains(mouseX, mouseY))
             {
-                onClick();
+                onClickEvent();
             }
-
-
-        }
-
-        private void onClick()
-        {
-            ScreenManager.moveTo(GameScreen.name);
         }
 
         public void Draw()
