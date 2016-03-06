@@ -9,8 +9,6 @@ namespace Jungletribes_Common
 {
     public abstract class Screen
     {
-
-        protected Game game;
         protected bool isInit;
         protected bool justInit;
         protected SpriteFont font;

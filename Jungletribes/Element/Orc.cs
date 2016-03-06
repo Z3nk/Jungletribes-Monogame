@@ -59,13 +59,25 @@ namespace Jungletribes
             A_top = new Animation();
             for (int i = 0; i < 9; i++)
                 A_top.AddFrame(new Rectangle(i * 64, 8 * 64, 64, 64), TimeSpan.FromSeconds(.1));
-            if (Orc_Texture == null)
-                using (var stream = TitleContainer.OpenStream("Content/orc.png"))
-                {
-                    Orc_Texture = Texture2D.FromStream(JungleTribesGame.Instance.GraphicsDevice, stream);
-                }
+            if (Orc_Texture == null || isInit == false)
+                LoadContent();
+            //using (var stream = TitleContainer.OpenStream("Content/orc.png"))
+            //{
+            //    Orc_Texture = Texture2D.FromStream(JungleTribesGame.Instance.GraphicsDevice, stream);
+            //}
             position = new Vector2(0, 0);
             speed = new Vector2(100, 100);
+        }
+
+        public override void LoadContent()
+        {
+            isInit = true;
+            Orc_Texture=JungleTribesGame.Instance.Content.Load<Texture2D>("orc");
+        }
+
+        public override void UnloadContent()
+        {
+            isInit = false;
         }
 
         public override void Update(GameTime gameTime)

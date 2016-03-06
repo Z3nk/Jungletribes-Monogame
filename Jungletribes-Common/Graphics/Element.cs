@@ -26,9 +26,18 @@ namespace Jungletribes_Common
             get { return _commands; }
             set { _commands = value; }
         }
+
+        private bool _isInit=false;
+        public bool isInit
+        {
+            get { return _isInit; }
+            set { _isInit = value; }
+        }
         #endregion
 
         #region methods
+        public abstract void LoadContent();
+        public abstract void UnloadContent();
         public abstract void Update(GameTime gameTime);
         public abstract void Draw(GameTime gameTime);
 

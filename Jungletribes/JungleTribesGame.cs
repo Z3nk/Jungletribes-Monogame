@@ -11,8 +11,8 @@ namespace Jungletribes
         public SpriteBatch spriteBatch;
         public static JungleTribesGame Instance;
 
-        public static readonly int widthScreen = 1920;
-        public static readonly int heightScreen = 1080;
+        public readonly int widthScreen = 1920;
+        public readonly int heightScreen = 1080;
 
         public JungleTribesGame()
         {
@@ -23,6 +23,7 @@ namespace Jungletribes
             Content.RootDirectory = "Content";
             Resolution.SetVirtualResolution(widthScreen, heightScreen);
             Resolution.SetResolution(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight, false);
+            this.IsMouseVisible = true;
             if (Instance == null)
                 Instance = this;
         }
@@ -38,8 +39,9 @@ namespace Jungletribes
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            ScreenManager.addScreen(GameScreen.name, new GameScreen(this));
-            ScreenManager.currentScreen = ScreenManager.getScreen(GameScreen.name);
+            ScreenManager.addScreen(GameScreen.name, new GameScreen());
+            ScreenManager.addScreen(MenuScreen.name, new MenuScreen());
+            ScreenManager.currentScreen = ScreenManager.getScreen(MenuScreen.name);
             ScreenManager.currentScreen.Initialize();
             ScreenManager.currentScreen.LoadContent();
         }

@@ -16,26 +16,27 @@ namespace Jungletribes
         private Element player;
         public KeyboardState KeyboardState;
 
-        public GameScreen(JungleTribesGame game1)
+        public GameScreen()
         {
-            this.game = game1;
         }
 
         public override void Initialize()
         {
-           
-
         }
 
         public override void LoadContent()
         {
+            isInit = true;
             test = new Orc();
             player = test;
         }
 
         public override void UnloadContent()
         {
-
+            isInit = false;
+            JungleTribesGame.Instance.Content.Unload();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         public override void Update(GameTime gameTime)

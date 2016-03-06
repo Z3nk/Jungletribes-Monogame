@@ -20,7 +20,9 @@ namespace Jungletribes_Common
 
         public static void moveTo(string screenName)
         {
+            currentScreen.UnloadContent();
             currentScreen = getScreen(screenName);
+            currentScreen.LoadContent();
         }
     }
 }
