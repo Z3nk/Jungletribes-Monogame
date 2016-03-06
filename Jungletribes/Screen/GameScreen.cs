@@ -5,6 +5,7 @@ using System.Text;
 using Jungletribes_Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Jungletribes
 {
@@ -14,6 +15,7 @@ namespace Jungletribes
         public static TimeSpan timer = TimeSpan.FromSeconds(0);
         private Orc test;
         private Element player;
+        private Texture2D floor;
         public KeyboardState KeyboardState;
 
         public GameScreen()
@@ -27,6 +29,10 @@ namespace Jungletribes
         public override void LoadContent()
         {
             isInit = true;
+            using (var stream = TitleContainer.OpenStream("Content/leaves.png"))
+            {
+                floor = Texture2D.FromStream(JungleTribesGame.Instance.GraphicsDevice, stream);
+            }
             test = new Orc();
             player = test;
         }
@@ -64,6 +70,9 @@ namespace Jungletribes
 
         public override void Draw(GameTime gameTime)
         {
+            for (int i = 0; i < 15; i++)
+                for (int y = 0; y < 15; y++)
+                    JungleTribesGame.Instance.spriteBatch.Draw(floor, new Rectangle(i * 128, y * 128, 128, 128), Color.White);
             test.Draw(gameTime);
         }
 

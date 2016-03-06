@@ -2,23 +2,28 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Jungletribes_Common;
+using System.Configuration;
+using System;
+using Lidgren.Network;
 
 namespace Jungletribes
 {
     public class JungleTribesGame : Game
     {
-        GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
         public static JungleTribesGame Instance;
 
         public readonly int widthScreen = 1920;
         public readonly int heightScreen = 1080;
+        public static readonly string serverIp = "serverIp";
+        public static readonly string serverPort = "serverPort";
 
         public JungleTribesGame()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 1600;
-            graphics.PreferredBackBufferHeight = 900;
+            graphics.PreferredBackBufferWidth = 1600;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.PreferredBackBufferHeight = 900;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             Resolution.Init(ref graphics);
             Content.RootDirectory = "Content";
             Resolution.SetVirtualResolution(widthScreen, heightScreen);
@@ -30,8 +35,14 @@ namespace Jungletribes
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
+            var appSettings = ConfigurationManager.AppSettings;
+            string IP = appSettings[serverIp] ?? "Not Found";
+            int PORT = Int32.Parse(appSettings[serverPort]);
+            var config = new NetPeerConfiguration("Jungletribes");
+            var client = new NetClient(config);
+            client.Start();
+            client.Connect(IP, PORT);
+            new WorldState(client);
             base.Initialize();
         }
 
@@ -60,7 +71,7 @@ namespace Jungletribes
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.DimGray);
+            GraphicsDevice.Clear(Color.Green);
             spriteBatch.Begin(SpriteSortMode.FrontToBack, null, null, null, null, null, Resolution.getTransformationMatrix());
             ScreenManager.currentScreen.Draw(gameTime);
             spriteBatch.End();

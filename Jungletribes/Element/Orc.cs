@@ -111,7 +111,7 @@ namespace Jungletribes
         public override void Draw(GameTime gameTime)
         {
             var sourceRectangle = current_animation.CurrentRectangle;
-            JungleTribesGame.Instance.spriteBatch.Draw(Orc_Texture, new Rectangle((int)this.position.X, (int)this.position.Y, sourceRectangle.Width, sourceRectangle.Height), sourceRectangle, Color.White, 0.0f, new Vector2(0, 0), SpriteEffects.None, 1.0f);
+            JungleTribesGame.Instance.spriteBatch.Draw(Orc_Texture, new Rectangle((int)this.position.X, (int)this.position.Y, sourceRectangle.Width, sourceRectangle.Height), sourceRectangle, Color.White, 0.0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);
         }
 
         public override void Synchronise()

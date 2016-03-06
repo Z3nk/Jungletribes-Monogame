@@ -54,18 +54,21 @@ namespace Jungletribes
             //    }
             //}
             var mouseState = Mouse.GetState();
-            Rectangle bound = new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y);
-            int mouseX = (int)Resolution.AdjustWidthWithScren(mouseState.Position.X);
-            int mouseY = (int)Resolution.AdjustWidthWithScren(mouseState.Position.Y);
-            if (bound.Contains(mouseX, mouseY))
+            if (mouseState.LeftButton == ButtonState.Pressed)
             {
-                onClickEvent();
+                Rectangle bound = new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y);
+                int mouseX = (int)Resolution.AdjustWidthWithScren(mouseState.Position.X);
+                int mouseY = (int)Resolution.AdjustWidthWithScren(mouseState.Position.Y);
+                if (bound.Contains(mouseX, mouseY))
+                {
+                    onClickEvent();
+                }
             }
         }
 
         public void Draw()
         {
-            JungleTribesGame.Instance.spriteBatch.Draw(texture, new Rectangle((int)this.position.X, (int)this.position.Y, texture.Width, texture.Height), new Rectangle(0, 0, texture.Width, texture.Height), Color.White, 0.0f, new Vector2(0, 0), SpriteEffects.None, 0.6f);
+            JungleTribesGame.Instance.spriteBatch.Draw(texture, new Rectangle((int)this.position.X, (int)this.position.Y, texture.Width, texture.Height), new Rectangle(0, 0, texture.Width, texture.Height), Color.White, 0.0f, new Vector2(0, 0), SpriteEffects.None, 1.0f);
         }
     }
 }
