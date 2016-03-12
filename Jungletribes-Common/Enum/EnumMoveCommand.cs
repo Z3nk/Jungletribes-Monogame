@@ -14,8 +14,8 @@ namespace Jungletribes_Common
         Right = 0x2,
         Bottom = 0x4,
         Left = 0x8,
-        LeftClick = 0x16,
-        RightClick = 0x32,
+        LeftClick = 0x10,
+        RightClick = 0x20,
         Vertical = Up | Bottom,
         Horizontal = Left | Right,
         Move = Up | Right | Left | Bottom

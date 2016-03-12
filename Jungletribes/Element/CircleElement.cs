@@ -72,7 +72,7 @@ namespace Jungletribes
             }
             if ((commands & EnumMoveCommand.RightClick) != EnumMoveCommand.None)
             {
-                //MoveToDo = Helper.getVectorToPoint(center, Pipe.MouseClick, this.speed * (float)gameTime.ElapsedGameTime.TotalSeconds);//
+                MoveToDo = Helper.getVectorToPoint(center, Pipe.MouseClick, this.speed * (float)gameTime.ElapsedGameTime.TotalSeconds);//
             }
 
             this.position += MoveToDo;
