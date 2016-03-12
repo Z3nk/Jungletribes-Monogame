@@ -49,28 +49,28 @@ namespace Jungletribes
         public override void Update(GameTime gameTime)
         {
             Vector2 MoveToDo = new Vector2(0, 0);
-            if ((commands & EnumMoveCommand.Left) != EnumMoveCommand.None)
+            if (commands.HasFlag(EnumMoveCommand.Left))
             {
                 MoveToDo.X -= this.speed.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-            if ((commands & EnumMoveCommand.Right) != EnumMoveCommand.None)
+            if (commands.HasFlag(EnumMoveCommand.Right))
             {
                 MoveToDo.X += this.speed.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-            if ((commands & EnumMoveCommand.Up) != EnumMoveCommand.None)
+            if (commands.HasFlag(EnumMoveCommand.Up))
             {
                 MoveToDo.Y -= this.speed.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-            if ((commands & EnumMoveCommand.Bottom) != EnumMoveCommand.None)
+            if (commands.HasFlag(EnumMoveCommand.Bottom))
             {
                 MoveToDo.Y += this.speed.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-            if ((commands & EnumMoveCommand.Horizontal) != EnumMoveCommand.None && (commands & EnumMoveCommand.Vertical) != EnumMoveCommand.None)
+            if (commands.HasFlag(EnumMoveCommand.Horizontal) && commands.HasFlag(EnumMoveCommand.Vertical))
             {
                 MoveToDo.X = (float)(Math.Cos(45) * MoveToDo.X);
                 MoveToDo.Y = (float)(Math.Sin(45) * MoveToDo.Y);
             }
-            if ((commands & EnumMoveCommand.RightClick) != EnumMoveCommand.None)
+            if (commands.HasFlag(EnumMoveCommand.RightClick))
             {
                 MoveToDo = Helper.getVectorToPoint(center, Pipe.MouseClick, this.speed * (float)gameTime.ElapsedGameTime.TotalSeconds);//
             }
