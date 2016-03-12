@@ -13,10 +13,10 @@ namespace Jungletribes
     {
         public static readonly String name = "gameScreen";
         public static TimeSpan timer = TimeSpan.FromSeconds(0);
-        private Orc test;
-        private Element player;
+        private CircleElement test;
         private Texture2D floor;
         public KeyboardState KeyboardState;
+        public MouseState _mouseState;
 
         public GameScreen()
         {
@@ -33,8 +33,8 @@ namespace Jungletribes
             {
                 floor = Texture2D.FromStream(JungleTribesGame.Instance.GraphicsDevice, stream);
             }
-            test = new Orc();
-            player = test;
+            test = new CircleElement();
+            Pipe.player = test;
         }
 
         public override void UnloadContent()
@@ -47,25 +47,45 @@ namespace Jungletribes
 
         public override void Update(GameTime gameTime)
         {
+            #region Keyboard
             KeyboardState = Keyboard.GetState();
-            player.commands = EnumMoveCommand.None;
+            Pipe.player.commands = EnumMoveCommand.None;
             if (KeyboardState.IsKeyDown(Keys.Q))
             {
-                player.commands = player.commands | EnumMoveCommand.Left;
+                Pipe.player.commands = Pipe.player.commands | EnumMoveCommand.Left;
             }
             if (KeyboardState.IsKeyDown(Keys.D))
             {
-                player.commands = player.commands | EnumMoveCommand.Right;
+                Pipe.player.commands = Pipe.player.commands | EnumMoveCommand.Right;
             }
             if (KeyboardState.IsKeyDown(Keys.Z))
             {
-                player.commands = player.commands | EnumMoveCommand.Up;
+                Pipe.player.commands = Pipe.player.commands | EnumMoveCommand.Up;
             }
             if (KeyboardState.IsKeyDown(Keys.S))
             {
-                player.commands = player.commands | EnumMoveCommand.Bottom;
+                Pipe.player.commands = Pipe.player.commands | EnumMoveCommand.Bottom;
             }
-            test.Update(gameTime);
+            #endregion
+
+            #region Mouse
+            _mouseState = Mouse.GetState();
+            Pipe.MousePosition = new Vector2(Resolution.AdjustWidthWithScren(_mouseState.Position.X), Resolution.AdjustWidthWithScren(_mouseState.Position.Y));
+            if (_mouseState.LeftButton == ButtonState.Pressed)
+            {
+                Pipe.MouseClick = new Vector2(Resolution.AdjustWidthWithScren(_mouseState.Position.X), Resolution.AdjustWidthWithScren(_mouseState.Position.Y));
+                Pipe.player.commands = Pipe.player.commands | EnumMoveCommand.LeftClick;
+            }
+            if (_mouseState.RightButton == ButtonState.Pressed)
+            {
+                Pipe.MouseClick = new Vector2(Resolution.AdjustWidthWithScren(_mouseState.Position.X), Resolution.AdjustWidthWithScren(_mouseState.Position.Y));
+                Pipe.player.commands = Pipe.player.commands | EnumMoveCommand.RightClick;
+            }
+            #endregion
+
+            #region update
+                test.Update(gameTime);
+            #endregion
         }
 
         public override void Draw(GameTime gameTime)

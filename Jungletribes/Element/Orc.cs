@@ -12,13 +12,20 @@ namespace Jungletribes
 {
     public class Orc : Element
     {
-        public Vector2 position;
-        public Vector2 speed;
+        private static Texture2D Orc_Texture { get; set; }
+
         public Animation A_right { get; set; }
         public Animation A_bot { get; set; }
         public Animation A_left { get; set; }
         public Animation A_top { get; set; }
 
+        public override Vector2 center
+        {
+            get
+            {
+                return new Vector2(position.X + Orc_Texture.Width / 2, position.Y + Orc_Texture.Height / 2);
+            }
+        }
         private Animation _current_animation;
         public Animation current_animation
         {
@@ -43,7 +50,7 @@ namespace Jungletribes
             }
         }
 
-        private static Texture2D Orc_Texture { get; set; }
+
         public Orc()
         {
             commands = EnumMoveCommand.None;

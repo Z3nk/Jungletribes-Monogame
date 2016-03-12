@@ -19,6 +19,9 @@ namespace Jungletribes_Common
             }
         }
 
+        public Vector2 position;
+        public Vector2 speed;
+        public abstract Vector2 center { get; }
 
         private EnumMoveCommand _commands;
         public EnumMoveCommand commands
