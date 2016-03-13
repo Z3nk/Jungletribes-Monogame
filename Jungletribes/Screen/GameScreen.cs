@@ -29,7 +29,7 @@ namespace Jungletribes
         public override void LoadContent()
         {
             isInit = true;
-            using (var stream = TitleContainer.OpenStream("Content/leaves.png"))
+            using (var stream = TitleContainer.OpenStream("Content/ground-black.png"))
             {
                 floor = Texture2D.FromStream(JungleTribesGame.Instance.GraphicsDevice, stream);
             }
@@ -92,7 +92,7 @@ namespace Jungletribes
         {
             for (int i = 0; i < 15; i++)
                 for (int y = 0; y < 15; y++)
-                    JungleTribesGame.Instance.spriteBatch.Draw(floor, new Rectangle(i * 128, y * 128, 128, 128), Color.White);
+                    JungleTribesGame.Instance.spriteBatch.Draw(floor, new Rectangle(i * 128, y * 128, floor.Width, floor.Height), new Rectangle(0, 0, floor.Width, floor.Height), Color.White, 0.0f, new Vector2(0, 0), SpriteEffects.None, 0.1f); 
             test.Draw(gameTime);
         }
 

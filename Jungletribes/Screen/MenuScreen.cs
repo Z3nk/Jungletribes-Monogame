@@ -55,6 +55,7 @@ namespace Jungletribes
 
         private void Button_onClick()
         {
+            //ScreenManager.moveTo(GameScreen.name);
             ScreenManager.moveTo(GameScreen.name);
         }
 
@@ -73,7 +74,7 @@ namespace Jungletribes
 
         public override void Draw(GameTime gameTime)
         {
-            JungleTribesGame.Instance.spriteBatch.Draw(background, new Rectangle(0, 0, background.Width, background.Height), Color.White);
+            //JungleTribesGame.Instance.spriteBatch.Draw(background, new Rectangle(0, 0, background.Width, background.Height), Color.White);
             for (int i = 0; i < 10; i++)
             {
                 JungleTribesGame.Instance.spriteBatch.Draw(wallScreenUp, new Rectangle(wallScreenUp.Width*i, 0, wallScreenUp.Width, wallScreenUp.Height), Color.White);

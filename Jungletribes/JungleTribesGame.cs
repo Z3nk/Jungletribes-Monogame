@@ -52,6 +52,7 @@ namespace Jungletribes
 
             ScreenManager.addScreen(GameScreen.name, new GameScreen());
             ScreenManager.addScreen(MenuScreen.name, new MenuScreen());
+            ScreenManager.addScreen(LoadingScreen.name, new LoadingScreen());
             ScreenManager.currentScreen = ScreenManager.getScreen(MenuScreen.name);
             ScreenManager.currentScreen.Initialize();
             ScreenManager.currentScreen.LoadContent();
@@ -71,7 +72,7 @@ namespace Jungletribes
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Green);
+            GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin(SpriteSortMode.FrontToBack, null, null, null, null, null, Resolution.getTransformationMatrix());
             ScreenManager.currentScreen.Draw(gameTime);
             spriteBatch.End();
