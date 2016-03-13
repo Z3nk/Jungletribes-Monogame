@@ -57,6 +57,8 @@ namespace Jungletribes_Server
                         switch (typeMessage)
                         {
                             case EnumMessageToServer.Init:
+                                var p=message.ReadByte(); // EnumTypeElement type perso choisi
+                                var p2=message.ReadString(); // String pseudo
                                 break;
                             case EnumMessageToServer.Update:
                                 break;

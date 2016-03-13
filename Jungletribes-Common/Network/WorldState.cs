@@ -32,10 +32,11 @@ namespace Jungletribes_Common
         public void CreateMessage(EnumMessageToServer typeMessage,List<object> values)
         {
             NetOutgoingMessage message = _client.CreateMessage();
+            message.Write((byte)typeMessage);
             switch (typeMessage)
             {
                 case EnumMessageToServer.Init:
-                    message.Write((byte)values[0]); // EnumTypeElement type perso choisi
+                    message.Write((byte)(EnumTypeElement)values[0]); // EnumTypeElement type perso choisi
                     message.Write((string)values[1]); // String pseudo
                     break;
                 case EnumMessageToServer.Update:
@@ -43,6 +44,7 @@ namespace Jungletribes_Common
                     message.Write((byte)values[1]); // EnumActionCommand command d'actions
                     break;
             }
+            _client.SendMessage(message, NetDeliveryMethod.ReliableOrdered);
         }
 
         public void Update(GameTime gameTime)

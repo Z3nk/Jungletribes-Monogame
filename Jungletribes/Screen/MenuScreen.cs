@@ -56,6 +56,10 @@ namespace Jungletribes
         private void Button_onClick()
         {
             //ScreenManager.moveTo(GameScreen.name);
+            List<object> values = new List<object>();
+            values.Add(EnumTypeElement.TaMere);
+            values.Add("tamere");
+            WorldState.Instance.CreateMessage(EnumMessageToServer.Init, values);
             ScreenManager.moveTo(GameScreen.name);
         }
 
