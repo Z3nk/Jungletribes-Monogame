@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4EDE503D-BB14-4A15-B6DB-FFD3F07D1532}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{D8549CAE-D13F-4002-A357-3AF685F60C6B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jungletribes_Common</RootNamespace>
-    <AssemblyName>Jungletribes-Common</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <RootNamespace>Jungletribes_Server</RootNamespace>
+    <AssemblyName>Jungletribes-Server</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,6 +25,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -35,11 +37,11 @@
   <ItemGroup>
     <Reference Include="Lidgren.Network, Version=3.4.0.456, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Jungletribes\Assemblies\Lidgren.Network.dll</HintPath>
+      <HintPath>..\..\..\Documents\Visual Studio 2015\Projects\Jungletribes\Jungletribes\Assemblies\Lidgren.Network.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Framework, Version=3.4.0.456, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,28 +52,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Action\ActionManager.cs" />
-    <Compile Include="Action\GameAction.cs" />
-    <Compile Include="Animation\Animation.cs" />
-    <Compile Include="Animation\AnimationFrame.cs" />
-    <Compile Include="Button\Button.cs" />
-    <Compile Include="Enum\EnumActionCommand.cs" />
-    <Compile Include="Enum\EnumMoveCommand.cs" />
-    <Compile Include="Enum\EnumMessageToServer.cs" />
-    <Compile Include="Enum\EnumMessageFromServer.cs" />
-    <Compile Include="Enum\EnumTypeElement.cs" />
-    <Compile Include="Graphics\Element.cs" />
-    <Compile Include="Graphics\Resolution.cs" />
-    <Compile Include="Graphics\Sprite.cs" />
-    <Compile Include="Network\NetworkState.cs" />
-    <Compile Include="Network\WorldState.cs" />
+    <Compile Include="FrameController.cs" />
+    <Compile Include="JungleTribesServer.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Screen\Screen.cs" />
-    <Compile Include="Screen\ScreenManager.cs" />
-    <Compile Include="Shared\Circle.cs" />
+    <Compile Include="WorldStateServer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Tools\" />
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Jungletribes-Common\Jungletribes-Common.csproj">
+      <Project>{4ede503d-bb14-4a15-b6db-ffd3f07d1532}</Project>
+      <Name>Jungletribes-Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jungletribes
+namespace Jungletribes_Common
 {
     public class Circle
     {
@@ -23,8 +23,8 @@ namespace Jungletribes
         }
         public Rectangle getAABB()
         {
-            var corner = this.pos-new Vector2(r, r);
-            return new Rectangle((int)corner.X,(int)corner.Y, r * 2, r * 2);
+            var corner = this.pos - new Vector2(r, r);
+            return new Rectangle((int)corner.X, (int)corner.Y, r * 2, r * 2);
         }
 
         public static bool CircleToCircle(Circle a, Circle b)

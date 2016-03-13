@@ -51,7 +51,6 @@
     <Compile Include="Screen\GameScreen.cs" />
     <Compile Include="Screen\LoadingScreen.cs" />
     <Compile Include="Screen\MenuScreen.cs" />
-    <Compile Include="Shared\Circle.cs" />
     <Compile Include="Shared\Helper.cs" />
     <Compile Include="Shared\Pipe.cs" />
   </ItemGroup>

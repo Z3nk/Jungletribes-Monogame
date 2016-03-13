@@ -10,6 +10,5 @@ namespace Jungletribes_Common
     {
         Init = 0,
         Update = 1,
-
     }
 }
