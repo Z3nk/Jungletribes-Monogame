@@ -10,12 +10,16 @@ namespace Jungletribes_Server
     {
 
         public bool Running=true;
-
+        WorldStateServer WSS;
         public JungleTribesServer()
         {
-            new Thread(new ThreadStart(ListenLoop)).Start();
+           // new Thread(new ThreadStart(ListenLoop)).Start();
 
-
+            var config = new NetPeerConfiguration("Jungletribes")
+            { Port = 7777 };
+            var server = new NetServer(config);
+            server.Start();
+            WSS = new WorldStateServer(server);
             var update = new FrameController(10, 30, false, Update);
 
             while (Running)
@@ -25,21 +29,10 @@ namespace Jungletribes_Server
             Console.ReadLine();
         }
 
-        private void ListenLoop()
-        {
-            var config = new NetPeerConfiguration("Jungletribes")
-            { Port = 7777 };
-            var server = new NetServer(config);
-            server.Start();
-            WorldStateServer WSS = new WorldStateServer(server);
-            while (true)
-            {
-                WSS.Update();
-            }
-        }
-
         public void Update(double delta_time)
         {
+            WSS.Update();
+
         }
     }
 }

@@ -10,8 +10,9 @@ namespace Jungletribes_Server
 {
     public class WorldStateServer
     {
-        private IEnumerable<Element> _networkObjects;
-        private IEnumerable<NetOutgoingMessage> _messagesToSend;
+        private List<Element> _networkObjects;
+        private List<Player> _players;
+        private List<NetOutgoingMessage> _messagesToSend;
         private NetServer _serveur;
         public static WorldStateServer Instance { get; set; }
         private IPEndPoint _ipEndPoint;
@@ -19,6 +20,7 @@ namespace Jungletribes_Server
         public WorldStateServer(NetServer serveur)
         {
             _networkObjects = new List<Element>();
+            _players = new List<Player>();
             _serveur = serveur;
             if (Instance == null)
                 Instance = this;
@@ -57,9 +59,32 @@ namespace Jungletribes_Server
                         switch (typeMessage)
                         {
                             case EnumMessageToServer.Init:
-                                var p=message.ReadByte(); // EnumTypeElement type perso choisi
-                                var p2=message.ReadString(); // String pseudo
+                                var p = (EnumTypeElement)message.ReadByte(); // EnumTypeElement type perso choisi
+                                ElementPlayable typeElement;
+                                switch (p)
+                                {
+                                    case EnumTypeElement.CircleElement:
+                                        typeElement = new CircleElement();
+                                        break;
+
+                                    default:
+                                        typeElement = null;
+                                        break;
+                                }
+
+                                var p2 = message.ReadString(); // String pseudo
+                                Player newPlayer = new Player()
+                                {
+                                    element = typeElement,
+                                    namePlayer = p2,
+                                    _PlayerState = EnumPlayerState.SearchingGame
+                                };
+
+                                typeElement.myPlayer = newPlayer;
+
+                                _players.Add(newPlayer);
                                 break;
+
                             case EnumMessageToServer.Update:
                                 break;
                         }

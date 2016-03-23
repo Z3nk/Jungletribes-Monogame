@@ -77,11 +77,11 @@ namespace Jungletribes
 
         public override void Draw(GameTime gameTime)
         {
-            if (!Circle.CircleToCircle(collision_circle, new Circle(Pipe.MousePosition, 5)))
-            {
+           /* if (!Circle.CircleToCircle(collision_circle, new Circle(Pipe.MousePosition, 5)))
+            {*/
                 JungleTribesGame.Instance.spriteBatch.Draw(Circle_Texture, new Rectangle((int)this.position.X, (int)this.position.Y, Circle_Texture.Width, Circle_Texture.Height), new Rectangle(0, 0, Circle_Texture.Width, Circle_Texture.Height), Color.White, 0.0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);
                 // JungleTribesGame.Instance.spriteBatch.Draw(C1, new Rectangle((int)this.position.X, (int)this.position.Y, C1.Width, C1.Height), Color.White);
-            }
+          //  }
 
             JungleTribesGame.Instance.spriteBatch.Draw(C2, new Rectangle((int)Pipe.MousePosition.X-C2.Width/2, (int)Pipe.MousePosition.Y - C2.Height / 2, C2.Width, C2.Height), new Rectangle(0, 0, C2.Width, C2.Height), Color.White, 0.0f, new Vector2(0, 0), SpriteEffects.None, 1.0f);
         }

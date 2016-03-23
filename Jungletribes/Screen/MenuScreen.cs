@@ -57,7 +57,7 @@ namespace Jungletribes
         {
             //ScreenManager.moveTo(GameScreen.name);
             List<object> values = new List<object>();
-            values.Add(EnumTypeElement.Player);
+            values.Add(EnumTypeElement.CircleElement);
             values.Add(Pipe.namePlayer);
             WorldState.Instance.CreateMessage(EnumMessageToServer.Init, values);
             ScreenManager.moveTo(LoadingScreen.name);
