@@ -12,6 +12,6 @@ namespace Jungletribes_Common
         Canard = 1,
         TaMere = 2,
         Guerrier = 3,
-
+        Player = 4
     }
 }

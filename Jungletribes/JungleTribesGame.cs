@@ -18,6 +18,7 @@ namespace Jungletribes
         public readonly int heightScreen = 1080;
         public static readonly string serverIp = "serverIp";
         public static readonly string serverPort = "serverPort";
+        public static readonly string name = "name";
 
         public JungleTribesGame()
         {
@@ -36,6 +37,7 @@ namespace Jungletribes
         protected override void Initialize()
         {
             var appSettings = ConfigurationManager.AppSettings;
+            Pipe.namePlayer = appSettings[name] ?? "A Stranger";
             string IP = appSettings[serverIp] ?? "Not Found";
             int PORT = Int32.Parse(appSettings[serverPort]);
             var config = new NetPeerConfiguration("Jungletribes");

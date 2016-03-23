@@ -13,5 +13,6 @@ namespace Jungletribes
         public static Vector2 MouseClick { get; set; }
         public static Vector2 MousePosition { get; internal set; }
         public static Element player;
+        public static string namePlayer;
     }
 }
