@@ -57,7 +57,7 @@ namespace Jungletribes_Server
             }
             if (commands.HasFlag(EnumMoveCommand.RightClick))
             {
-                MoveToDo = Helper.getVectorToPoint(center, myPlayer._MouseClick, this.speed * (float)gameTime.ElapsedGameTime.TotalSeconds);//
+                MoveToDo = Helper.getVectorToPoint(center, _MyPlayer._MouseClick, this.speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
             }
 
             this.position += MoveToDo;

@@ -17,6 +17,6 @@ namespace Jungletribes_Server
         public override abstract void Synchronise();
         public override abstract void Synchronise(NetIncomingMessage var);
         #endregion
-        public Player myPlayer { get; set; }
+        public Player _MyPlayer { get; set; }
     }
 }

@@ -52,15 +52,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Room.cs" />
     <Compile Include="Element\CircleElement.cs" />
     <Compile Include="Element\ElementPlayable.cs" />
     <Compile Include="Enum\EnumPlayerState.cs" />
-    <Compile Include="FrameController.cs" />
+    <Compile Include="Enum\EnumRoomState.cs" />
+    <Compile Include="Helper\FrameController.cs" />
     <Compile Include="JungleTribesServer.cs" />
     <Compile Include="Physics\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WorldStateServer.cs" />
+    <Compile Include="Core\WorldStateServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
